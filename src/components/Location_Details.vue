@@ -86,8 +86,11 @@ const { result, loading: locationsLoading, error: locationsError } = useQuery(LO
         </div>
       </main>
       <footer class="bg-gray-800 p-4 text-center">
-        <p>&copy; 2024 Rick and Morty: The Movie. All rights reserved.</p>
-      </footer>
+          <p>&copy; 2024 Rick and Morty: The Movie. All rights reserved. 
+            <a target="_blank" href="https://www.figma.com/design/GVFKwGgsVCxHkK2Ox5Bwj0/Rick-and-Morty?node-id=102-2&t=0jwXQHSZ8DJILdMj-0"><i class="fa-brands fa-figma"></i></a> 
+            <a target="_blank" href="https://github.com/RedietBT"><i class="fa-brands fa-github ml-2"></i></a>
+          </p>
+        </footer>
     </div>
   </template>
   
