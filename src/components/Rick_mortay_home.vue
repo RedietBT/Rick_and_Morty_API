@@ -2,6 +2,18 @@
 import { useQuery } from '@vue/apollo-composable'
 import { gql } from 'graphql-tag'
 import {RouterLink} from "vue-router"
+
+import { Carousel, Pagination, Slide } from 'vue3-carousel'
+import 'vue3-carousel/dist/carousel.css'
+
+const images = [
+  'https://i.pinimg.com/564x/8b/e0/ba/8be0baf34d37bf42e82162a533483c6a.jpg',
+  'https://i.pinimg.com/564x/1e/b4/5d/1eb45d2da22831745e3bdae3d6016a2e.jpg',
+  'https://i.pinimg.com/originals/72/34/49/72344973cd068446e8a75e1ea6183f93.jpg',
+  'https://i.pinimg.com/564x/ac/95/f2/ac95f2de25a14f35efc2263e308a257c.jpg',
+  'https://i.pinimg.com/564x/e5/8e/6a/e58e6ad2862b803871a2856fde90b19f.jpg'
+]
+
 // Define the GraphQL queries
 const CHARACTERS_QUERY = gql`
   query Characters {
@@ -91,10 +103,17 @@ console.log(locationsResult)
       <main class="p-4">
         <!-- Carousel Section -->
         <section class="mb-8">
-            <div class="w-full bg-gray-700 flex justify-center items-center">
-                <img src="https://i.pinimg.com/564x/b6/16/e3/b616e3b499ac9269c9d07d047566b0f5.jpg" class="object-cover w-full h-64 rounded-lg">
-            </div>
-            </section>
+          <Carousel :autoplay="2000" :wrap-around="true">
+            <Slide v-for="(image, index) in images" :key="index">
+              <div class="carousel__item w-full">
+                <img :src="image" :alt="'Slide ' + index" class="w-full h-[350px]  rounded-lg">
+              </div>
+            </Slide>
+            <template #addons>
+              <Pagination />
+            </template>
+          </Carousel>
+        </section>
 
 <!-- Description/Storyline Section -->
 
@@ -149,11 +168,7 @@ console.log(locationsResult)
                     <div class="container mx-auto">
                       <div class="slider bg-white shadow-lg">
                           <div class="slides">
-                              <img src="https://i.pinimg.com/564x/80/17/91/8017910cae86c3cc923ce51c83e7f4d0.jpg" alt="Image 1" class="slide">
-                              <img src="https://i.pinimg.com/564x/dd/53/a9/dd53a9c584f7df0efe88ec95ea418cac.jpg" class="slide">
-                              <img src="https://i.pinimg.com/564x/d3/9b/3c/d39b3c7e2563e0496b80e1d63fae088a.jpg" alt="Image 3" class="slide">
-                              <img src="https://i.pinimg.com/564x/1a/82/d6/1a82d64c5db8e6059560a75b3681b58e.jpg" alt="Image 4" class="slide">
-                              <img src="https://i.pinimg.com/564x/dd/53/a9/dd53a9c584f7df0efe88ec95ea418cac.jpg" alt="Image 5" class="slide">
+                              <img src="https://i.pinimg.com/564x/80/17/91/8017910cae86c3cc923ce51c83e7f4d0.jpg" alt="Image 1" class="w-full">
                           </div>
                       </div>
                   </div>
@@ -260,38 +275,6 @@ console.log(locationsResult)
 </template>
 
 <style scoped>
-  .slider {
-          overflow: hidden;
-          position: relative;
-      }
-      .slides {
-          display: flex;
-          transition: transform 1s ease-in-out;
-      }
-      .slide {
-          min-width: 100%;
-      }
-      .slider:hover .slides {
-          animation: slideAnimation 10s infinite;
-      }
-      @keyframes slideAnimation {
-          0%, 20% {
-              transform: translateX(0%);
-          }
-          25%, 45% {
-              transform: translateX(-100%);
-          }
-          50%, 70% {
-              transform: translateX(-200%);
-          }
-          75%, 95% {
-              transform: translateX(-300%);
-          }
-          100% {
-              transform: translateX(-400%);
-          }
-      }
-
       .rating-bar {
             background-color: #f3f4f6;
             position: relative;
