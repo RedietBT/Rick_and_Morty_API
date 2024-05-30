@@ -12,12 +12,14 @@
           gender
           species
           episode{
+            id
             name
             episode
             air_date
             created
           }
           location{
+            id
             name
           }
         }
@@ -67,7 +69,9 @@
         <div v-else class="space-y-6">
           <div v-for="character in result.characters.results" :key="character.id" class="bg-gray-800 shadow-md rounded-lg overflow-hidden transform transition-transform hover:scale-105 w-full flex flex-col md:flex-row mb-6">
             <div class="p-6 md:w-1/3 flex flex-row items-center">
+              <RouterLink :to="'/characters/' + character.id">
               <img :src="character.image" alt="Character Image" class="w-45 h-45 object-cover rounded-full mr-6">
+            </RouterLink>
               <div>
                 <h3 class="font-semibold text-3xl text-blue-500">{{ character.name }}</h3><br>
                 <span class="font-semibold text-2xl">{{ character.status }}</span><br>
@@ -78,18 +82,24 @@
             <div class="p-6 md:w-2/3">
               <div class="mb-6">
                 <h4 class="text-lg font-medium mb-2">Location:</h4>
+                <RouterLink :to="'/locations/' + character.location.id">
                 <div class="bg-gray-700 p-4 rounded-lg text-sm">
                   <span class="font-semibold">{{ character.location.name }}</span>
                 </div>
+              </RouterLink>
               </div>
               <div>
                 <h4 class="text-lg font-medium mb-2">Episodes:</h4>
                 <div class="flex space-x-4 overflow-x-auto">
                   <div v-for="ep in character.episode" :key="ep.id" class="min-w-max bg-gray-700 p-4 rounded-lg text-sm">
+                    <RouterLink :to="'/episodes/' + ep.id">
+                    <div>
                     <span class="font-semibold">{{ ep.name }}</span><br>
                     <span class="font-semibold">{{ ep.episode }}</span><br>
                     <span class="font-semibold">({{ ep.air_date }})</span><br>
                     <span class="font-semibold">({{ ep.created }})</span><br>
+                  </div>
+                  </RouterLink>
                   </div>
                 </div>
               </div>
